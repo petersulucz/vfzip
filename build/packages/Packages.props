@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PackageReference Update="System.CommandLine" Version="2.0.0-beta1.21308.1" />
+		<PackageReference Update="System.CommandLine.Rendering" Version="0.3.0-alpha.21216.1" />
+  </ItemGroup>
+</Project>

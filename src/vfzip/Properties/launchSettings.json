@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "vfzip": {
+      "commandName": "Project",
+      "commandLineArgs": "decompress C:\\Code\\Logship-Backend\\bin\\publish\\test.vfzip C:\\Code\\Logship-Backend\\bin\\publish\\testresult\\"
+    }
+  }
+}
