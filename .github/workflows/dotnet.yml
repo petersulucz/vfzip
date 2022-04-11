@@ -23,7 +23,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore $PROJECT_PATH -r ${{ matrix.runtime }} -c release
+      run: dotnet restore $PROJECT_PATH -r ${{ matrix.runtime }}
     - name: Build
       run: dotnet build $PROJECT_PATH --no-restore -r ${{ matrix.runtime }} --self-contained -c release
     - name: Artifacts Folder
