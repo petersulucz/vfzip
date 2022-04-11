@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_PATH: src/vfzip/vfzip.csproj 
+      ARTIFACTS_PATH: artifacts/
 
     steps:
     - uses: actions/checkout@v3
@@ -25,6 +26,14 @@ jobs:
       run: dotnet restore $PROJECT_PATH -r ${{ matrix.runtime }}
     - name: Build
       run: dotnet build $PROJECT_PATH --no-restore -r ${{ matrix.runtime }}
-    - name: Publish Windows
-      run: dotnet publish $PROJECT_PATH --no-build --verbosity normal --self-contained -r ${{ matrix.runtime }}
-      
+    - name: Artifacts Folder
+      run: mkdir -p $ARTIFACTS_PATH
+    - name: Publish
+      run: dotnet publish $PROJECT_PATH --no-build --verbosity normal --self-contained -r ${{ matrix.runtime }} -o $ARTIFACTS_PATH
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: executable
+        path: $ARTIFACTS_PATH/vfzip*
+        if-no-files-found: error
+        retention-days: 0
