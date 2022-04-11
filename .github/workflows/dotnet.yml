@@ -12,6 +12,8 @@ jobs:
       matrix:
         runtime: [win-x64, linux-x64]
     runs-on: ubuntu-latest
+    env:
+      PROJECT_PATH: src/vfzip/vfzip.csproj 
 
     steps:
     - uses: actions/checkout@v3
@@ -20,9 +22,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore --project $env:PROJECT_PATH
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --project $env:PROJECT_PATH
     - name: Publish Windows
-      run: dotnet publish --no-build --verbosity normal --self-contained -r ${{ matrix.runtime }}
+      run: dotnet publish --project $env:PROJECT_PATH --no-build --verbosity normal --self-contained -r ${{ matrix.runtime }}
       
