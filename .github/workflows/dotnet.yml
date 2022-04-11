@@ -34,6 +34,6 @@ jobs:
       uses: actions/upload-artifact@v3.0.0
       with:
         name: executable
-        path: $ARTIFACTS_PATH/vfzip*
+        path: "$ARTIFACTS_PATH/vfzip*"
         if-no-files-found: error
         retention-days: 0
