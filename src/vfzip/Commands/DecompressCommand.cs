@@ -24,7 +24,7 @@ namespace vfzip.Commands
 
         private static async Task RunAsync(string source, string target, CancellationToken token)
         {
-            var runner = new DirectoryCompressor(Path.GetFullPath(source), Path.GetFullPath(target));
+            var runner = new DirectoryDecompressor(Path.GetFullPath(source), Path.GetFullPath(target));
             await runner.ExecuteAsync(token);
         }
     }
