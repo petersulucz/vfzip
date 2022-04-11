@@ -11,10 +11,10 @@ jobs:
     strategy:
       matrix:
         runtime: [win-x64, linux-x64]
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       PROJECT_PATH: src/vfzip/vfzip.csproj 
-      ARTIFACTS_PATH: artifacts/
+      ARTIFACTS_PATH: artifacts
 
     steps:
     - uses: actions/checkout@v3
@@ -23,17 +23,17 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore $PROJECT_PATH -r ${{ matrix.runtime }}
+      run: dotnet restore ${{ env.PROJECT_PATH }} -r ${{ matrix.runtime }}
     - name: Build
-      run: dotnet build $PROJECT_PATH --no-restore -r ${{ matrix.runtime }} --self-contained -c release
+      run: dotnet build ${{ env.PROJECT_PATH }} --no-restore -r ${{ matrix.runtime }} --self-contained -c release
     - name: Artifacts Folder
-      run: mkdir -p $ARTIFACTS_PATH
+      run: mkdir ${{ env.ARTIFACTS_PATH }}
     - name: Publish
-      run: dotnet publish $PROJECT_PATH --no-build --verbosity normal --self-contained -r ${{ matrix.runtime }} -o $ARTIFACTS_PATH -c release
+      run: dotnet publish ${{ env.PROJECT_PATH }} --verbosity normal --self-contained -r ${{ matrix.runtime }} -o ${{ env.ARTIFACTS_PATH }} -c release
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
-        name: executable
-        path: ${{ env.ARTIFACTS_PATH }}/vfzip*
+        name: ${{ matrix.runtime }}
+        path: ${{ env.ARTIFACTS_PATH }}/*
         if-no-files-found: error
         retention-days: 0
