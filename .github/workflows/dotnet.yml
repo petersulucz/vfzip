@@ -25,7 +25,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore $PROJECT_PATH -r ${{ matrix.runtime }}
     - name: Build
-      run: dotnet build $PROJECT_PATH --no-restore -r ${{ matrix.runtime }}
+      run: dotnet build $PROJECT_PATH --no-restore -r ${{ matrix.runtime }} --self-contained
     - name: Artifacts Folder
       run: mkdir -p $ARTIFACTS_PATH
     - name: Publish
