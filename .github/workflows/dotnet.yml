@@ -22,9 +22,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore --project $env:PROJECT_PATH
+      run: dotnet restore $env:PROJECT_PATH
     - name: Build
-      run: dotnet build --no-restore --project $env:PROJECT_PATH
+      run: dotnet build $env:PROJECT_PATH --no-restore
     - name: Publish Windows
-      run: dotnet publish --project $env:PROJECT_PATH --no-build --verbosity normal --self-contained -r ${{ matrix.runtime }}
+      run: dotnet publish $env:PROJECT_PATH --no-build --verbosity normal --self-contained -r ${{ matrix.runtime }}
       
